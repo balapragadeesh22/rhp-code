@@ -1,0 +1,23 @@
+import java.util.*;
+public class Main{
+  public static void main(String[] args){
+    int n,m;
+    Scanner sc=new Scanner(System.in);
+    n=sc.nextInt();
+    m=sc.nextInt();
+    int sum[]=new int[n+2];
+    while(m-- >0){
+      int from=sc.nextInt();
+      int to=sc.nextInt();
+      sum[from]++;
+      sum[to+1]--;
+    }
+    int mini=Integer.MAX_VALUE;
+    for(int w=1;w<=n;w++){
+      sum[w]=sum[w]+sum[w-1];
+      mini=Math.min(mini,sum[w]);
+      
+    }
+    System.out.println(mini);
+  }
+}
