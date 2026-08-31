@@ -1,0 +1,40 @@
+#include<iostream>
+#include<set>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+
+int solve(){
+	int l,q;
+	cin>>l>>q;
+	set<int>s;
+	s.insert(0);
+	s.insert(l);
+	while(q--){
+		int c,x;
+		cin>>c>>x;
+		if(c==1){
+			s.insert(x);
+			
+		}
+		else{
+			auto it =s.upper_bound(x);
+			
+			
+			cout<<*it-*(prev(it))<<endl;
+		}
+		
+	}
+	return 0;
+}
+
+int main(){
+	ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+	int tc=1;
+	while(tc--){
+		solve();
+	}
+	return 0;
+}
