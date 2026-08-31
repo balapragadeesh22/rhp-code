@@ -1,0 +1,54 @@
+#include<iostream>
+#include<set>
+#include<vector>
+#include<algorithm>
+#include <utility>
+
+using namespace std;
+
+
+
+
+int solve(){
+	int n;
+	cin>>n;
+	vector<pair<int,int>>p(n);
+	
+	for(int h=0;h<n;h++){
+		int ht,lt;
+		cin>>ht>>lt;
+		
+		p[h]=make_pair(ht,lt);
+		
+		}
+		sort(p.begin(),p.end(),greater<>());
+	int prev=0;
+	vector<int>ltr,htr;
+	for(auto[ht,lt]:p){
+		if(lt>prev){
+			prev=lt;
+			ltr.push_back(lt);
+			htr.push_back(ht);
+			
+		}
+	}
+	int q;cin>>q;
+	while(q--){
+		int t;cin>>t;
+		auto it=upper_bound(ltr.begin(),ltr.end(),t);
+		int idx=it-ltr.begin();
+		cout<<htr[idx]<<endl;
+	}
+	return 0;
+}
+
+
+int main(){
+	ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+	int tc=1;
+	while(tc--){
+		solve();
+	}
+	return 0;
+}
