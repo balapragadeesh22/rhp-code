@@ -1,0 +1,39 @@
+class Solution {
+public:
+    int nearestExit(vector<vector<char>>& maze, vector<int>& entrance) {
+        int r=maze.size();
+        int c=maze[0].size();
+        queue<pair<int,int>>q;
+        q.push({entrance[0],entrance[1]});
+        maze[entrance[0]][entrance[1]]='+';
+        int diff[5]={0,-1,0,1,0};
+        int count=-1;
+        while(!q.empty()){
+            int n=q.size();
+            count++;
+            while(n--){
+            auto [row,col]=q.front();
+            q.pop();
+            
+        for(int i=0;i<4;i++){
+            int rw=row+diff[i];
+            int cl=col+diff[i+1];
+            if(rw>=0 &&cl>=0 && rw<r && cl<c ){
+               if(maze[rw][cl]=='.'){
+                q.push({rw,cl});
+                maze[rw][cl]='+';
+               }
+                
+        } 
+          if(row==0 || row==r-1 || col==0 || col==c-1){
+                    if(!(row==entrance[0] && col==entrance[1])){
+                        return count;
+                    }
+                }
+        }
+        }
+        }
+        return -1;
+
+    }
+};
