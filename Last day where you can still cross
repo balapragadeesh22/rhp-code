@@ -1,0 +1,48 @@
+class Solution {
+    public:
+	   int find( vector<int>& ldr,int node){
+        if(ldr[node]!=node){
+            ldr[node]=find(ldr,ldr[node]);
+        }
+        return ldr[node];
+    }
+       void join(vector<int>& l,int rt,int lt){
+    	l[find(l,rt)]=find(l,lt);
+    }
+      int latestDayToCross(int r, int c, vector<vector<int>>& cells) {
+       vector<bool>water(r*c+2,false);
+       vector<int>ldr(r*c+2);
+       for(int node=0;node<r*c+2;node++) ldr[node]=node;
+       int d[8][2]={{-1,-1},{-1,0},{-1,1},{0,-1},{0,1},{1,-1},{1,0},{1,1}};
+       int days=0;
+       for(vector<int>cell:cells){
+       	int rw=cell[0];
+       	int cl=cell[1];
+       	rw--;
+       	cl--;
+       	water[rw*c+cl+1]=true;
+       	for(int t=0;t<8;t++){
+       		int ar=rw+d[t][0];
+       		int ac=cl+d[t][1];
+       		if(ar>=0 && ar<r && ac>=0 && ac<c && water[ar*c+ac+1]){
+       			join(ldr,rw*c+cl+1,ar*c+ac+1);
+       		}
+       
+       
+       
+       	}
+       	if(cl==0){
+       		join(ldr,0,rw*c+cl+1);
+       	}
+       	if(cl==c-1){
+       		join(ldr,rw*c+cl+1,r*c+1);
+       	}
+       	if(find(ldr,0)==find(ldr,r*c+1)){
+       		return days;
+       	}
+       	days++;
+       	       }
+        return days;
+    }
+    
+};
