@@ -1,0 +1,51 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<map>
+#include<set>
+#include<queue>
+#define ll long long int
+
+using namespace std;
+int solve(){
+	int n;
+	cin>>n;
+	vector<int>arr(n);
+	
+	for(int x=0;x<n;x++){
+		int a;
+		cin>>a;
+		arr[x]=a;
+	}
+	sort(arr.begin(),arr.end());
+	ll sum=0;
+	for (int b=0;b<n;b++){
+		auto it=upper_bound(arr.begin(),arr.end(),arr[b]);
+		ll upper=arr.end()-it;
+		auto up=lower_bound(arr.begin(),arr.end(),arr[b]);
+		ll down=up-arr.begin();
+		 
+    
+    	sum += upper*down;
+	
+		
+	}
+	
+	
+	cout<<sum;
+		
+	return 0;
+}
+
+
+
+
+int main(){
+	ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+	int tc=1;
+	while(tc--){
+		solve();
+	}
+	return 0;
+}
