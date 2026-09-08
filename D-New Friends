@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class Main {
-    // DSU find with path compression
+    
     private static int find(int[] ldr, int node) {
         if (ldr[node] != node) {
             ldr[node] = find(ldr, ldr[node]);
@@ -12,7 +12,7 @@ public class Main {
         return ldr[node];
     }
 
-    // DSU join with Union by Size
+    
     private static void join(int[] ldr, int[] size, int rt, int lt) {
         int rootRt = find(ldr, rt);
         int rootLt = find(ldr, lt);
@@ -55,12 +55,11 @@ public class Main {
         int[] gcnt = new int[N + 1];
         int[] ecnt = new int[N + 1];
 
-        // Count members in each component
         for (int node = 1; node <= N; node++) {
             gcnt[find(ldr, node)]++;
         }
 
-        // Count edges in each component
+        
         for (int c = 1; c <= E; c++) {
             ecnt[find(ldr, edges[c])]++;
         }
