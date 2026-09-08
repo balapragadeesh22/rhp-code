@@ -1,53 +1,79 @@
-import java.util.*;
-public class new_frnds_atc {
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
-    private static int find(int[] ldr,int node){
-        if(ldr[node]!=node){
-            ldr[node]=find(ldr,ldr[node]);
+public class Main {
+    // DSU find with path compression
+    private static int find(int[] ldr, int node) {
+        if (ldr[node] != node) {
+            ldr[node] = find(ldr, ldr[node]);
         }
         return ldr[node];
     }
 
-    private static void join(int [] ldr, int rt,int  lt){
-        ldr[find(ldr,rt)]=find(ldr,lt);
-
+    // DSU join with Union by Size
+    private static void join(int[] ldr, int[] size, int rt, int lt) {
+        int rootRt = find(ldr, rt);
+        int rootLt = find(ldr, lt);
+        
+        if (rootRt != rootLt) {
+            // Attach the smaller tree under the larger tree
+            if (size[rootRt] < size[rootLt]) {
+                ldr[rootRt] = rootLt;
+                size[rootLt] += size[rootRt];
+            } else {
+                ldr[rootLt] = rootRt;
+                size[rootRt] += size[rootLt];
+            }
+        }
     }
-    public static void main(String[] args) {
-        Scanner sc= new Scanner (System.in);
-        int N = sc.nextInt();
-        int E= sc.nextInt();
 
-        int [] ldr = new int[N+1];
-        for (int node=0; node<=N;node++) ldr[node]=node;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int [] edges = new int[E+1];
-        for (int i=1;i<=E;i++){
-            int a = sc.nextInt();
-            int b = sc.nextInt();
-            edges[i]=a;
-            join(ldr,a,b);
-        }
-        int [] gcnt= new int[N+1];
-        int [] ecnt = new int[N+1];
+        int N = Integer.parseInt(st.nextToken());
+        int E = Integer.parseInt(st.nextToken());
 
-        for(int node=1;node<=N;node++){
-            gcnt[find(ldr,node)]++;
+        int[] ldr = new int[N + 1];
+        int[] size = new int[N + 1];
+        for (int node = 0; node <= N; node++) {
+            ldr[node] = node;
+            size[node] = 1;
         }
-       for(int c=1;c<=E;c++){
-            ecnt[find(ldr,edges[c])]++;
+
+        int[] edges = new int[E + 1];
+        for (int i = 1; i <= E; i++) {
+            st = new StringTokenizer(br.readLine());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            edges[i] = a;
+            join(ldr, size, a, b);
         }
-long ans=0;
-        for(int node=1;node<=N;node++){
-            long curr= ((long)gcnt[node]*(gcnt[node]-1)/2)-ecnt[node];
-            ans+=curr;
+
+        int[] gcnt = new int[N + 1];
+        int[] ecnt = new int[N + 1];
+
+        // Count members in each component
+        for (int node = 1; node <= N; node++) {
+            gcnt[find(ldr, node)]++;
+        }
+
+        // Count edges in each component
+        for (int c = 1; c <= E; c++) {
+            ecnt[find(ldr, edges[c])]++;
+        }
+
+        long ans = 0;
+        for (int node = 1; node <= N; node++) {
+            // Only process component leaders to avoid redundant math
+            if (gcnt[node] > 0) {
+                long curr = ((long) gcnt[node] * (gcnt[node] - 1) / 2) - ecnt[node];
+                ans += curr;
+            }
         }
 
         System.out.println(ans);
-
-
-        
-
-        sc.close();
-        
     }
 }
