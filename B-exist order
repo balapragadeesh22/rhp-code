@@ -1,0 +1,43 @@
+#include<iostream>
+
+
+using namespace std;
+int solve(){
+int n;
+cin>>n;
+int start=1;
+int end=10;
+for(int i=1;i<n;i++){
+  int ct;
+  cin>>ct;
+  if(!(ct>=start && ct<=end)){
+    cout<<"No"<<endl;
+    return 0;
+  }
+  
+  if(i%10==0){
+  start+=10;
+  end+=10;
+  }
+  
+}
+cout<<"Yes"<<endl;
+	return 0;
+}
+
+
+
+
+
+
+
+int main(){
+	ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+	int tc=1;
+	
+	while(tc--){
+		solve();
+	}
+	return 0;
+}
