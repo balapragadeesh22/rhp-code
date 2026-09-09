@@ -1,0 +1,45 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<map>
+#include<set>
+#include<queue>
+#define ll long long int
+
+using namespace std;
+int solve(){
+	int n;
+	cin>>n;
+	int odd=0;
+	int oq=0;
+	int eq=0;
+	for(int i=0;i<n;i++){
+		int k;
+		cin>>k;
+		if(k&1)odd++;
+		else{
+			int z=k/2;
+			if(z&1) oq++;
+			else{
+				eq++;
+			}
+		}
+	}
+	cout<<max(odd,max(oq,eq))<<endl;
+	
+	
+	return 0;
+}
+
+
+
+int main(){
+	ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+	int tc;
+	cin>>tc;
+	while(tc--){
+		solve();
+	}
+	return 0;
+}
