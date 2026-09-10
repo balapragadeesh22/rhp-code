@@ -1,0 +1,52 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<map>
+#include<set>
+#include<queue>
+#define ll long long int
+ 
+using namespace std;
+int solve(){
+	ll x,y,z;
+	cin>>x>>y>>z;
+	ll sum=0;
+	ll a=0;
+	ll rem=0;
+	while(a<z){
+		
+		sum=(a+y)%(a+x);
+		
+		if(sum==(y-x)){
+			break ;
+			}
+			rem+=sum;
+		a++;
+		
+		
+		}
+		if(z>a){
+			rem+=(y-x)*(z-a);
+		
+		
+	}
+	
+	
+	cout<<rem<<endl;
+	
+	return 0;
+}
+ 
+ 
+ 
+int main(){
+	ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+	int tc;
+	cin>>tc;
+	while(tc--){
+		solve();
+		
+	}
+	return 0;
+}
