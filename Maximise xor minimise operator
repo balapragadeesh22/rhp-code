@@ -1,0 +1,48 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+ 
+ 
+using namespace std;
+int solve(){
+	int n,m;
+	cin>>n>>m;
+	int sum=n+m;
+	int rx=0;
+	int ry=0;
+	for(int lmt=30;lmt>=0;lmt--){
+		if((sum&(1<<lmt))!=0){
+			if((rx|(1<<lmt))<=n){
+				rx=rx|(1<<lmt);
+			}
+			else{
+				ry=ry|(1<<lmt);
+			}
+		}
+	}
+	
+	cout<<sum<<" ";
+	cout<<n-rx<<endl;
+	
+	
+	
+	
+	
+	
+	
+	return 0;
+}
+ 
+ 
+ 
+int main(){
+	ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+	int tc;
+	cin>>tc;
+	while(tc--){
+		solve();
+		
+	}
+	return 0;
+}
