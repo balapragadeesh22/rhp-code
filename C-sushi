@@ -1,0 +1,56 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<map>
+#define ll long long int
+
+using namespace std;
+int solve(){
+	int n,m;
+	cin>>n>>m;
+	vector<int>x(n);
+	vector<int>y(m);
+	
+	for(int i=0;i<n;i++){
+		cin>>x[i];
+	}
+	for(int j=0;j<m;j++){
+		cin>>y[j];
+	}int cnt=0;
+	int a=0;
+	sort(x.begin(),x.end());
+	sort(y.begin(),y.end());
+	for(int i=n-1,j=m-1 ; j>=0 && i>=0;){
+		if(y[j]<2*x[i]){
+			i--;
+			j--;
+			cnt++;
+		}
+		else{
+			j--;
+		}
+	}
+	
+	
+	cout<<cnt;
+	
+	
+	
+	
+	
+	return 0;
+}
+
+
+
+int main(){
+	ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+	int tc=1;
+	
+	while(tc--){
+		solve();
+		
+	}
+	return 0;
+}
