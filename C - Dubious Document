@@ -1,0 +1,42 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+
+using namespace std;
+int solve(){
+	int n;
+	cin>>n;
+	vector<int>ans(26,50);
+	for(int i=0;i<n;i++){
+		string s;
+		cin>>s;
+		vector<int>carry(26,0);
+		for(char c:s){
+			carry[(c-'a')]++;
+		}
+		for(int f=0;f<26;f++){
+			ans[f]=min(ans[f],carry[f]);
+		}
+	}
+	for(int i=0;i<26;i++){
+		while(ans[i]--){
+			cout<<(char)('a'+i);
+		}
+	}
+	
+	return 0;
+}
+
+
+
+int main(){
+	ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+	int tc=1;
+	
+	while(tc--){
+		solve();
+		
+	}
+	return 0;
+}
