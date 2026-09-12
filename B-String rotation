@@ -1,0 +1,36 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<map>
+#define ll long long int
+
+using namespace std;
+int solve(){
+	string s,a;
+	cin>>s>>a;
+	string finl=a+a;
+	if(finl.contains(s)){
+		cout<<"Yes";
+	}
+	else{
+		cout<<"No";
+	}
+		
+	
+	
+	return 0;
+}
+
+
+
+int main(){
+	ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+	int tc=1;
+	
+	while(tc--){
+		solve();
+		
+	}
+	return 0;
+}
